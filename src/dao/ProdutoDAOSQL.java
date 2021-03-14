@@ -109,24 +109,23 @@ public class ProdutoDAOSQL {
 
             PreparedStatement ps = connection.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
-
+            Produto produto;
+            
             while (rs.next()) {
+                produto = new Produto(rs.getString("codigo"));
+                produto.setDtEntrada(rs.getString("data_entrada"));
+                produto.setLocalCompra(rs.getString("local_compra"));
+                produto.setTipo(rs.getString("tipo"));
+                produto.setMarca(rs.getString("marca"));
+                produto.setCaracteristicas(rs.getString("caracteristicas"));
+                produto.setTamanho(rs.getString("tamanho"));
+                produto.setCor(rs.getString("cor"));
+                produto.setValorEtiqueta(rs.getString("valor_etiqueta"));
+                produto.setValorPago(rs.getString("valor_pago"));
+                produto.setValorMargem(rs.getString("valor_margem"));
+                produto.setPrecoSugerido(rs.getString("preco_sugerido"));
 
-                dado.add(new Object[]{
-                    rs.getInt("codigo"),
-                    rs.getString("data_entrada"),
-                    rs.getString("local_compra"),
-                    rs.getString("tipo"),
-                    rs.getString("marca"),
-                    rs.getString("caracteristicas"),
-                    rs.getString("tamanho"),
-                    rs.getString("cor"),
-                    rs.getString("valor_etiqueta"),
-                    rs.getString("valor_pago"),
-                    rs.getString("valor_margem"),
-                    rs.getString("preco_sugerido"),
-                });
-
+                dado.add(produto);
             }
             ps.close();
             rs.close();
@@ -141,10 +140,10 @@ public class ProdutoDAOSQL {
 
     }
 
-    public ArrayList listarTodos() {
+    public ArrayList<Produto> listarTodos() {
         try {
 
-            ArrayList dado = new ArrayList();
+            ArrayList<Produto> dado = new ArrayList<Produto>();
 
             PreparedStatement ps = connection.prepareStatement("SELECT * FROM estoque");
             ResultSet rs = ps.executeQuery();

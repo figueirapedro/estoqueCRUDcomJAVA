@@ -137,7 +137,7 @@ public class Produto {
     }
 
     public void imprimirProduto() {
-        System.out.printf("Código: %d | Data de Entrada: %d | Local da Compra: %d | Tipo: %d | Marca: %d | Caracteristicas: %d | Tamanho: %d | Cor: %d | Valor Etiqueta: %d | Valor Pago: %d | Valor Margem: %d | Pre;o Sugerido: %d", new Object[]{
+        System.out.printf("Código: %s | Data de Entrada: %s | Local da Compra: %s | Tipo: %s | Marca: %s | Caracteristicas: %s | Tamanho: %s | Cor: %s | Valor Etiqueta: %s | Valor Pago: %s | Valor Margem: %s | Preço Sugerido: %s", new Object[]{
             getCodigo(),
             getDtEntrada(),
             getLocalCompra(),
@@ -155,7 +155,8 @@ public class Produto {
     public String produtoParaString() {
 
         String[] texto = {getCodigo(), getDtEntrada(), getLocalCompra(), getTipo(), getMarca(), getCaracteristicas(), getTamanho(), getCor(), getValorEtiqueta(), getValorPago(), getValorMargem(), getPrecoSugerido(), "\n"};
-        return String.join(",", texto);
+        String a = String.join(",", texto);
+        return a;
     }
 
 }

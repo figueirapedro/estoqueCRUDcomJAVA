@@ -26,7 +26,7 @@ public class ProdutoDAOTXT {
         String estoque = "";
         
         for(Produto a : dado){
-            estoque.concat(a.produtoParaString());
+            estoque = estoque + a.produtoParaString();
         }
 
         try {
@@ -48,10 +48,11 @@ public class ProdutoDAOTXT {
 
     public void salvar(Produto objProd) {
             
-            ArrayList<Produto> dado = listarTodos();
+        ArrayList<Produto> dado = new ArrayList();
             
             if(buscar(objProd.getCodigo()) == null){
-                dado.add(objProd);salvar(dado);            
+                dado.add(objProd);
+                salvar(dado);            
             } else {
                 salvar(editar(objProd));
             }
@@ -59,7 +60,8 @@ public class ProdutoDAOTXT {
 
     public void deletar(Produto objProd) {
 
-        ArrayList<Produto> dado = listarTodos();
+        ArrayList<Produto> dado = new ArrayList();
+        dado = listarTodos();
 
         for (Produto a : dado) {
             if (a.getCodigo().equals(objProd.getCodigo())) {
@@ -76,7 +78,8 @@ public class ProdutoDAOTXT {
 
     public Produto buscar(String codigo) {
 
-        ArrayList<Produto> dado = listarTodos();
+        ArrayList<Produto> dado = new ArrayList();
+        dado = listarTodos();
 
         for (Produto a : dado) {
             if (a.getCodigo().equals(codigo)) {
@@ -84,17 +87,22 @@ public class ProdutoDAOTXT {
             }
         }
         
-        System.out.println("Produto não foi encontrado!");
         return null;
     }
     
      public ArrayList<Produto> editar(Produto objProd) {
 
-        ArrayList<Produto> dado = listarTodos();
-        int i = dado.indexOf(buscar(objProd.getCodigo()));
-
-        dado.remove(i);
-        dado.add(i , objProd);
+        ArrayList<Produto> dado = new ArrayList();
+        dado = listarTodos();
+        
+        int i;
+        
+        for (Produto a : dado){
+            if(a.getCodigo().equals(buscar(objProd.getCodigo()).getCodigo()))
+                dado.remove(dado.indexOf(a)); break;
+        }
+        
+        dado.add(objProd);
         
         return dado;        
     }
